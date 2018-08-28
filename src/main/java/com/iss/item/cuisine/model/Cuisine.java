@@ -1,10 +1,5 @@
 package com.iss.item.cuisine.model;
 
-import java.io.UnsupportedEncodingException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
 public class Cuisine {
 
 	private int id;
@@ -15,26 +10,6 @@ public class Cuisine {
 	private float discount;
 	private String lable;
 	private String remark;
-
-	
-	public Cuisine(ResultSet rs){
-		try {
-			this.id = rs.getInt("id");
-			//this.name = rs.getString("name");
-			this.name = new String(rs.getBytes("name"), "ISO-8859-1");
-			this.type = rs.getString("type");
-			this.price = rs.getInt("price");
-			this.preferential = rs.getInt("preferential");
-			this.discount = rs.getInt("discount");
-			this.lable = rs.getString("lable");
-			this.remark = rs.getString("remark");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	
 	public int getId() {
 		return id;
