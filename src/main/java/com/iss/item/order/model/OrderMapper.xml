@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iss.item.order.dao.OrderMapper" >
+
+  <insert id="save" parameterType="Order" useGeneratedKeys="true">
+  	insert into fd_order(cuisine_id, user_id, state, count, amount, buy_time, insert_time) 
+  				values(#{cuisineId}, #{userId}, #{state}, #{count}, #{amount}, #{buyTime}, datetime('now'))
+  </insert>
+  
+    <select id="listByState" resultType="Order">
+    select * from fd_order where state = #{state} and userId = #{userId}
+  </select>
+  
+</mapper>

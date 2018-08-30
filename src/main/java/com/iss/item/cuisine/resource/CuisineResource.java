@@ -19,7 +19,7 @@ public class CuisineResource {
 	@Resource
 	private CuisineMapper mapper;
 	
-	 @RequestMapping(value="/list", method=RequestMethod.GET)
+	@RequestMapping(value="/list", method=RequestMethod.GET)
     public List<Cuisine> ListCuisine() throws Exception{
 		List<Cuisine> list = mapper.list();
         return list;

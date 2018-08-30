@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iss.item.user.dao.UserMapper" >
+
+  <insert id="save" parameterType="User" useGeneratedKeys="true">
+  	insert into fd_user(open_id, union_id, nick_name, country, province, city, language, gender, avatar_url, insert_time) 
+  				values(#{openId}, #{unionId}, #{nickName}, #{country}, #{province}, #{city}, #{language}, #{gender}, #{avatarUrl}, datetime('now'))
+  </insert>
+  
+  <select id="getByOpenId" resultType="User">
+    select * from fd_user where open_id = #{openId}
+  </select>
+  
+</mapper>
