@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.iss.item.feedback.dao.FeedbackMapper;
 import com.iss.item.feedback.model.Feedback;
 
-@RequestMapping("FeedbackResource")
+@RequestMapping("/FeedbackResource")
 @RestController
 public class FeedbackResource {
 
