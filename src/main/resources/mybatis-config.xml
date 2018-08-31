@@ -11,7 +11,9 @@
 
 	<typeAliases>
 		<typeAlias alias="Cuisine" type="com.iss.item.cuisine.model.Cuisine"></typeAlias>
+		<typeAlias alias="Feedback" type="com.iss.item.feedback.model.Feedback"></typeAlias>
 		<typeAlias alias="Order" type="com.iss.item.order.model.Order"></typeAlias>
+		<typeAlias alias="Store" type="com.iss.item.store.model.Store"></typeAlias>
 		<typeAlias alias="User" type="com.iss.item.user.model.User"></typeAlias>
 	</typeAliases>
 </configuration>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iss.item.feedback.dao.FeedbackMapper" >
+
+	<insert id="save"  parameterType="Feedback" useGeneratedKeys="true">
+		insert into fd_feedback(user_id, type, content, contact, insert_time)
+    		values(#{userId}, #{type}, #{content}, #{contact}, datetime('now'))
+	</insert>
+
+</mapper>

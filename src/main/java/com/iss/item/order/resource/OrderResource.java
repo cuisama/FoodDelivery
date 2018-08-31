@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iss.framework.Global;
-import com.iss.framework.OrderState;
+import com.iss.framework.State;
 import com.iss.framework.RequireRole;
 import com.iss.item.order.dao.OrderMapper;
 import com.iss.item.order.model.Order;
@@ -65,10 +64,10 @@ public class OrderResource {
 	 */
 	@RequestMapping(value="/remove/{id}/{state}", method=RequestMethod.POST)
 	public int remove(@PathVariable("id") int id, @PathVariable("state") int state){
-		if(state == OrderState.CONFIRMED){//已经被商家确认的订单不可取消
+		if(state == State.CONFIRMED){//已经被商家确认的订单不可取消
 			return 0;
 		}
-		int result = mapper.updateState(id, OrderState.DELETE);
+		int result = mapper.updateState(id, State.DELETE);
 		return result;
 	}
 }
