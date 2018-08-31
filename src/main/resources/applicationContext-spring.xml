@@ -78,5 +78,5 @@
 		<property name="basePackage" value="com.iss.item.*.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
-
+	
 </beans>

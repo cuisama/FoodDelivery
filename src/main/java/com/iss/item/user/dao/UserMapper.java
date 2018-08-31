@@ -18,4 +18,11 @@ public interface UserMapper {
 	 * @return
 	 */
 	User getByOpenId(@Param("openId") String openId);
+	
+	/**
+	 * 获得用户角色
+	 * @param openId
+	 * @return
+	 */
+	String getRole(@Param("openId") String openId);
 }

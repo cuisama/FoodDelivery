@@ -3,12 +3,27 @@
 <mapper namespace="com.iss.item.order.dao.OrderMapper" >
 
   <insert id="save" parameterType="Order" useGeneratedKeys="true">
-  	insert into fd_order(cuisine_id, user_id, state, count, amount, buy_time, insert_time) 
-  				values(#{cuisineId}, #{userId}, #{state}, #{count}, #{amount}, #{buyTime}, datetime('now'))
+  	insert into fd_order(cuisine, user_id, state, count, amount, buy_time, insert_time) 
+  				values(#{cuisine}, #{userId}, '0', #{count}, #{amount}, #{buyTime}, datetime('now'))
   </insert>
   
-    <select id="listByState" resultType="Order">
-    select * from fd_order where state = #{state} and userId = #{userId}
+  <select id="listByState" resultType="Order">
+    select * from fd_order where state = #{state} and user_id = #{userId}
   </select>
+  
+  <insert id="oneMore" useGeneratedKeys="true">
+  	insert into fd_order(cuisine, user_id, state, count, amount, buy_time, insert_time)
+		select cuisine, user_id, 0, count, amount, datetime('now'), datetime('now') from fd_order where id = #{id}
+  </insert>
+  
+  <update id="updateAllState">
+  	update fd_order set state = #{newState} where state = #{oldState}
+  </update>
+  
+  <update id="updateState">
+  	update fd_order set state = #{newState} where id = #{id}
+  </update>
+  
+  
   
 </mapper>

@@ -3,12 +3,16 @@
 <mapper namespace="com.iss.item.user.dao.UserMapper" >
 
   <insert id="save" parameterType="User" useGeneratedKeys="true">
-  	insert into fd_user(open_id, union_id, nick_name, country, province, city, language, gender, avatar_url, insert_time) 
-  				values(#{openId}, #{unionId}, #{nickName}, #{country}, #{province}, #{city}, #{language}, #{gender}, #{avatarUrl}, datetime('now'))
+  	insert into fd_user(open_id, union_id, nick_name, role, country, province, city, language, gender, avatar_url, insert_time) 
+  				values(#{openId}, #{unionId}, #{nickName}, 'Customer', #{country}, #{province}, #{city}, #{language}, #{gender}, #{avatarUrl}, datetime('now'))
   </insert>
   
   <select id="getByOpenId" resultType="User">
     select * from fd_user where open_id = #{openId}
+  </select>
+  
+  <select id="getRole" resultType="java.lang.String">
+  	select role from fd_user where open_id = #{openId}
   </select>
   
 </mapper>

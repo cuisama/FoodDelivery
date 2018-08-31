@@ -3,7 +3,7 @@ package com.iss.item.order.model;
 public class Order {
 
 	private int id;
-	private String cuisineId;
+	private String cuisine;
 	private String userId;
 	private int state;
 	private int count;
@@ -18,12 +18,12 @@ public class Order {
 		this.id = id;
 	}
 
-	public String getCuisineId() {
-		return cuisineId;
+	public String getCuisine() {
+		return cuisine;
 	}
 
-	public void setCuisineId(String cuisineId) {
-		this.cuisineId = cuisineId;
+	public void setCuisine(String cuisine) {
+		this.cuisine = cuisine;
 	}
 
 	public String getUserId() {
