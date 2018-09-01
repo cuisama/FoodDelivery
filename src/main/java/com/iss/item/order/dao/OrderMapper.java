@@ -46,4 +46,11 @@ public interface OrderMapper {
 	 * @return
 	 */
 	int updateState(@Param("id") int id, @Param("newState") int newState);
+
+	/**
+	 * 管理员  查询所有类型订单
+	 * @param state
+	 * @return
+	 */
+	List<Order> listAllByState(@Param("state") int state);
 }

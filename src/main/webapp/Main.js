@@ -9,10 +9,9 @@ $(function(){
         $("#btnListOrderState").click(function () {
             var state = $("#selOrderState").val()
             u.request({
-                url:"/OrderResource/listByState/",
+                url:"/OrderResource/listAllByState/",
                 data:{
                     state:state,
-                    userId:"oGZUI0egBJY1zhBYw2KhdUfwVJJE"
                 },
                 success:function (res) {
                     var data = res;
@@ -37,12 +36,30 @@ $(function(){
                     switch (state){
                         case "0":
                             $("#orderStateOpe0").click(function () {
-
+                                var id = $(this).parents("tr").children("td:first-child").html()
+                                u.request({
+                                    url:"/OrderResource/updateState/" + id + "/0",
+                                    method:"POST",
+                                    success:function (res) {
+                                        if(res > 0){
+                                            $("#btnListOrderState").click();
+                                        }
+                                    }
+                                })
                             });
                             break;
                         case "1":
                             $("#orderStateOpe1").click(function () {
-
+                                var id = $(this).parents("tr").children("td:first-child").html()
+                                u.request({
+                                    url:"/OrderResource/updateState/" + id + "/1",
+                                    method:"POST",
+                                    success:function (res) {
+                                        if(res > 0){
+                                            $("#btnListOrderState").click();
+                                        }
+                                    }
+                                })
                             });
                             break;
                     }
@@ -68,9 +85,11 @@ util.prototype={
 
         $.ajax({
             url: "http://localhost:8080/FoodDelivery/service" + data.url,
-            data:data.data,
+            data: data.data,
+            method: data.method || "GET",
             header:{
-                "content-type":"application/json"
+                "content-type":"application/json",
+                "token": "oGZUI0egBJY1zhBYw2KhdUfwVJJE"
             },
             success:function (res) {
                 data.success(res);

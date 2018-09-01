@@ -24,6 +24,8 @@
   	update fd_order set state = #{newState} where id = #{id}
   </update>
   
-  
+  <select id="listAllByState" resultType="Order">
+      select * from fd_order where state = #{state}
+  </select>
   
 </mapper>

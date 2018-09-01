@@ -70,4 +70,12 @@ public class OrderResource {
 		int result = mapper.updateState(id, State.DELETE);
 		return result;
 	}
+
+	@RequireRole(Global.ROLE_ADMIN)
+	@RequestMapping(value="/listAllByState", method=RequestMethod.GET)
+	public List<Order> listByState(@RequestParam("state") int state){
+		List<Order> list = mapper.listAllByState(state);
+		return list;
+	}
+
 }
