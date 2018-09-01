@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Main.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="Main.js"></script>
+    <title>主页</title>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <div class="row form-group">
+                <div class="col-md-2">订单状态：</div>
+                <select  class="col-md-6 form-control" id="selOrderState">
+                    <option value="0">待确认</option>
+                    <option value="1">已确认</option>
+                    <option value="2">已完成</option>
+                    <option value="3">待评价</option>
+                </select>
+                <button class="col-md-2 offset-md-1 btn btn-primary" id="btnListOrderState">查询</button>
+            </div>
+            <table class="table" id="orderStateTable">
+                <thead>
+                <th>用户名</th>
+                <th>菜品</th>
+                <th>金额</th>
+                <th>购买时间</th>
+                <th>状态</th>
+                <th>操作</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
