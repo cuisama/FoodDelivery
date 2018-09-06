@@ -40,7 +40,7 @@ public interface OrderMapper {
 	/**
 	 * 更新一个订单的状态  
 	 * 删除 state--> 9
-	 * 待确认[0]、已确认[1]、已完成[2]、待评价[3]
+	 * 待确认[0]、已确认[1]、已完成[2]、已评价[3]
 	 * @param id
 	 * @param state
 	 * @return

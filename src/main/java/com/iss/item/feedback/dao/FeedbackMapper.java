@@ -1,5 +1,7 @@
 package com.iss.item.feedback.dao;
 
+import java.util.List;
+
 import com.iss.item.feedback.model.Feedback;
 
 public interface FeedbackMapper {
@@ -10,4 +12,10 @@ public interface FeedbackMapper {
 	 * @return
 	 */
 	int save(Feedback feedback);
+	
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	List<Feedback> list();
 }

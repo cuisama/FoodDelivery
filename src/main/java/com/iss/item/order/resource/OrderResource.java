@@ -73,7 +73,7 @@ public class OrderResource {
 
 	@RequireRole(Global.ROLE_ADMIN)
 	@RequestMapping(value="/listAllByState", method=RequestMethod.GET)
-	public List<Order> listByState(@RequestParam("state") int state){
+	public List<Order> listAllByState(@RequestParam("state") int state){
 		List<Order> list = mapper.listAllByState(state);
 		return list;
 	}

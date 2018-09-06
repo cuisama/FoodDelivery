@@ -1,5 +1,7 @@
 package com.iss.item.user.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.iss.item.user.model.User;
@@ -25,4 +27,17 @@ public interface UserMapper {
 	 * @return
 	 */
 	String getRole(@Param("openId") String openId);
+	
+	/**
+	 * 查询用户
+	 * @param userId
+	 * @return
+	 */
+	User get(@Param("userId") String userId);
+	
+	/**
+	 * 查询所有用户
+	 * @return
+	 */
+	List<User> list();
 }

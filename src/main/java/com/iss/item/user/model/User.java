@@ -11,6 +11,9 @@ public class User {
 	private String language;
 	private String gender;
 	private String avatarUrl;
+	private String userId;
+	private String password;
+	private String insertTime;
 
 	public String getOpenId() {
 		return openId;
@@ -82,6 +85,30 @@ public class User {
 
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getInsertTime() {
+		return insertTime;
+	}
+
+	public void setInsertTime(String insertTime) {
+		this.insertTime = insertTime;
 	}
 
 }

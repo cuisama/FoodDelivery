@@ -6,4 +6,20 @@
     select * from fd_cuisine
   </select>
   
+  <select id="listActive" resultType="Cuisine">
+ 	select * from fd_cuisine where state = 1 
+  </select>
+  
+  <update id="updateState">
+  	update fd_cuisine 
+  		set state = #{newState} 
+  	where id = #{id}
+  </update>
+  
+  <update id="update">
+  	update fd_cuisine 
+  		set name = #{name}, price = #{price}, preferential = #{preferential}, discount = #{discount} 
+  	where id = #{id}
+  </update>
+  
 </mapper>

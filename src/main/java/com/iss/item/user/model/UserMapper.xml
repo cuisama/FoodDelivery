@@ -15,4 +15,13 @@
   	select role from fd_user where open_id = #{openId}
   </select>
   
+  <select id="get" resultType="User">
+  	select * from fd_user where user_id = #{userId}
+  </select>
+  
+  <select id="list" resultType="User">
+  	select nick_name, role, country, province, city, language, gender, avatar_url, insert_time
+  		from fd_user
+  </select>
+  
 </mapper>

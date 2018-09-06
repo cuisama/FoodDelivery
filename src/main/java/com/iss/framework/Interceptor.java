@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.iss.item.user.dao.UserMapper;
 
-public class RestFulInterceptor implements HandlerInterceptor{
+public class Interceptor implements HandlerInterceptor{
 
 	@Resource
 	private UserMapper mapper;

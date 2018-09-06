@@ -41,7 +41,7 @@
     
     <!-- 拦截器 -->
 	<mvc:interceptors>
-        <bean class="com.iss.framework.RestFulInterceptor"/>
+        <bean class="com.iss.framework.Interceptor"/>
     </mvc:interceptors>
 
 </beans>

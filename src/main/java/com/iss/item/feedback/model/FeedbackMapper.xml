@@ -6,5 +6,9 @@
 		insert into fd_feedback(user_id, type, content, contact, insert_time)
     		values(#{userId}, #{type}, #{content}, #{contact}, datetime('now'))
 	</insert>
+	
+	<select id="list" resultType="Feedback">
+		select * from fd_feedback
+	</select>
 
 </mapper>

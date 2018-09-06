@@ -18,28 +18,210 @@
 </head>
 <body>
     <div class="container">
-        <div class="module">
+        <div class="header">
+            <a id="login" href="#">登录</a>
+        </div>
+        <div id="nav">
+            <ul class="nav nav-tabs">
+              <li class="nav-item" data-index="m1">
+                <a class="nav-link active" href="#">订单状态表</a>
+              </li>
+              <li class="nav-item" data-index="m2">
+                <a class="nav-link" href="#">菜品表</a>
+              </li>
+              <li class="nav-item" data-index="m3">
+                <a class="nav-link" href="#">反馈表</a>
+              </li>
+              <li class="nav-item" data-index="m4">
+                <a class="nav-link" href="#">用户表</a>
+              </li>
+            </ul>
+        </div>
+
+        <div id="m1" class="module">
             <div class="row form-group">
-                <div class="col-md-2">订单状态：</div>
-                <select  class="col-md-6 form-control" id="selOrderState">
-                    <option value="0">待确认</option>
-                    <option value="1">已确认</option>
-                    <option value="2">已完成</option>
-                    <option value="3">待评价</option>
-                </select>
-                <button class="col-md-2 offset-md-1 btn btn-primary" id="btnListOrderState">查询</button>
+                <label class="col-md-2 col-form-label">订单状态</label>
+                <div class="col-md-6 ">
+                	<select class="form-control" id="selOrderState">
+	                    <option value="0">待确认</option>
+	                    <option value="1">已确认</option>
+	                    <option value="2">已完成</option>
+	                    <option value="3">待评价</option>
+                	</select>
+                </div>
+                <button class="col-sm-1 offset-md-1 btn btn-primary" id="btnListOrderState">查询</button>
             </div>
             <table class="table" id="orderStateTable">
                 <thead>
-                <th>用户名</th>
-                <th>菜品</th>
-                <th>金额</th>
-                <th>购买时间</th>
-                <th>状态</th>
-                <th>操作</th>
+	                <tr>
+		                <th>订单号</th>
+		                <th>菜品</th>
+		                <th>金额</th>
+		                <th>购买时间</th>
+		                <th>状态&nbsp;&nbsp;&nbsp;&nbsp;</th>
+		                <th>操作</th>
+	                </tr>
                 </thead>
                 <tbody></tbody>
             </table>
+            <table class="table" id="orderStatistics" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>菜品</th>
+                        <th>总个数</th>
+                        <th>总金额</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="m2" class="module">
+            <table class="table" id="cuisineTable">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>菜名</th>
+                        <th>售价</th>
+                        <th>优惠</th>
+                        <th>折扣</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="m3" class="module">
+            <table class="table" id="feedbackTable">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>类型</th>
+                        <th>具体内容</th>
+                        <th>联系方式</th>
+                        <th>反馈时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="m4" class="module">
+            <table class="table" id="userTable">
+                <thead>
+                    <tr>
+                        <th>头像</th>
+                        <th>昵称</th>
+                        <th>国家</th>
+                        <th>省份</th>
+                        <th>城市</th>
+                        <th>性别</th>
+                        <th>注册时间</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="editCuisineModal" class="modal fade" role="dialog" data-backdrop="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">编辑菜品</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">菜名</span>
+                          </div>
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">售价</span>
+                          </div>
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">优惠</span>
+                          </div>
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">折扣</span>
+                          </div>
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="hidden-column"><input type="text"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div id="loginModal" class="modal fade" role="dialog" data-backdrop="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">登录</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">帐号</span>
+                          </div>
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">密码</span>
+                          </div>
+                          <input type="password" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- 共通弹窗 -->
+    <div id="modal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>
