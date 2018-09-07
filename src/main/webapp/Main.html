@@ -39,18 +39,20 @@
         </div>
 
         <div id="m1" class="module">
-            <div class="row form-group">
-                <label class="col-md-2 col-form-label">订单状态</label>
-                <div class="col-md-6 ">
-                	<select class="form-control" id="selOrderState">
-	                    <option value="0">待确认</option>
-	                    <option value="1">已确认</option>
-	                    <option value="2">已完成</option>
-	                    <option value="3">待评价</option>
-                	</select>
-                </div>
-                <button class="col-sm-1 offset-md-1 btn btn-primary" id="btnListOrderState">查询</button>
-            </div>
+            <form class="form-inline">
+                <div class="input-group mb-2 mr-sm-2" style="width:50%;">
+				    <div class="input-group-prepend">
+				      <div class="input-group-text">订单状态</div>
+				    </div>
+				    <select class="form-control" id="selOrderState">
+		                    <option value="0">待确认</option>
+		                    <option value="1">已确认</option>
+		                    <option value="2">已完成</option>
+		                    <option value="3">待评价</option>
+	                	</select>
+				  </div>
+				  <button class="btn btn-primary mb-2" id="btnListOrderState">查询</button>
+            </form>
             <table class="table" id="orderStateTable">
                 <thead>
 	                <tr>
@@ -77,9 +79,16 @@
         </div>
 
         <div id="m2" class="module">
+            <div class="tool-bar">
+            	<form class="form-inline">
+	            	<button class="btn btn-primary mb-2">刷新</button>
+	            	<button class="btn btn-primary mb-2">新增</button>
+            	</form>
+            </div>
             <table class="table" id="cuisineTable">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>id</th>
                         <th>菜名</th>
                         <th>售价</th>
@@ -98,9 +107,9 @@
                     <tr>
                         <th>id</th>
                         <th>类型</th>
-                        <th>具体内容</th>
+                        <th>内容</th>
                         <th>联系方式</th>
-                        <th>反馈时间</th>
+                        <th>时间</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -160,6 +169,27 @@
                             <span class="input-group-text" id="basic-addon1">折扣</span>
                           </div>
                           <input type="text" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">标签</span>
+                          </div>
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">备注</span>
+                          </div>
+                          <input type="text" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend" id="upload">
+                            <span class="input-group-text">上传</span>
+                          </div>
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile">
+                            <label class="custom-file-label" for="inputGroupFile">选择文件</label>
+                          </div>
                         </div>
                         <div class="hidden-column"><input type="text"></div>
                     </div>

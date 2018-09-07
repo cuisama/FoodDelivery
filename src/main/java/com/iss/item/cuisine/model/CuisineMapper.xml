@@ -3,11 +3,13 @@
 <mapper namespace="com.iss.item.cuisine.dao.CuisineMapper" >
 
   <select id="list" resultType="Cuisine" >
-    select * from fd_cuisine
+    select id, name, type, price, preferential, discount, label, remark, state, 
+    image  
+    from fd_cuisine
   </select>
   
   <select id="listActive" resultType="Cuisine">
- 	select * from fd_cuisine where state = 1 
+ 	select id, name, type, price, preferential, discount, label, remark, state, image  from fd_cuisine where state = 1 
   </select>
   
   <update id="updateState">
@@ -18,8 +20,26 @@
   
   <update id="update">
   	update fd_cuisine 
-  		set name = #{name}, price = #{price}, preferential = #{preferential}, discount = #{discount} 
+  		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null and name != ''"> name = #{name},</if>
+			<if test="type != null and type != ''"> type = #{type},</if>
+			<if test="1"> price = #{price},</if>
+			<if test="1"> preferential = #{preferential},</if>
+			<if test="1"> discount = #{discount},</if>
+			<if test="label != null and label != ''"> label = #{label},</if>
+			<if test="remark != null and remark != ''"> remark = #{remark},</if>
+			<if test="image != null and image != ''"> image = #{image},</if>
+		</trim>
   	where id = #{id}
   </update>
+  
+  <insert id="save">
+  	insert into fd_cuisine(name, type, price, preferential, discount, label, remark, image) 
+  		values(#{name}, #{type}, #{price}, #{preferential}, #{discount}, #{label}, #{remark}, #{image})
+  </insert>
+  
+  <delete id="remove">
+  	delete from fd_cuisine where id = #{id}
+  </delete>
   
 </mapper>

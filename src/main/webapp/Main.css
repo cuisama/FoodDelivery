@@ -17,13 +17,25 @@ body{
 th{
 	white-space: nowrap;
 }
+.tool-bar{
+	padding:10px;
+}
+
 .cuisine-state-ope0{
 	color:#999
 }
 .hidden-column{
 	display: none;
 }
-#m4 table td{
+
+#m2 img{
+	width:50px;
+	height:50px;
+}
+#m1 button,#m2 button{
+	margin-left: 10px;
+}
+#m2 table td,#m4 table td{
 	vertical-align: middle;
 }
 

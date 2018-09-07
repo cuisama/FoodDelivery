@@ -1,18 +1,17 @@
 package com.iss.item.cuisine.model;
 
-import com.iss.framework.State;
-
 public class Cuisine {
 
 	private int id;
 	private String name;
 	private String type;
 	private float price;
-	private float preferential;
-	private float discount;
-	private int state;
-	private String lable;
+	private float preferential = 0;
+	private float discount = 1;
+	private int state = 0;
+	private String label;
 	private String remark;
+	private String image;
 
 	public int getId() {
 		return id;
@@ -70,12 +69,12 @@ public class Cuisine {
 		this.state = state;
 	}
 
-	public String getLable() {
-		return lable;
+	public String getLabel() {
+		return label;
 	}
 
-	public void setLable(String lable) {
-		this.lable = lable;
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	public String getRemark() {
@@ -86,10 +85,12 @@ public class Cuisine {
 		this.remark = remark;
 	}
 
-	@Override
-	public String toString() {
-		return "Cuisine [id=" + id + ", name=" + name + ", type=" + type + ", price=" + price + ", preferential="
-				+ preferential + ", discount=" + discount + ", lable=" + lable + ", remark=" + remark + "]";
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

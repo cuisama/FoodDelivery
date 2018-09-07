@@ -35,4 +35,18 @@ public interface CuisineMapper {
 	 * @return
 	 */
 	int update(Cuisine cuisine);
+	
+	/**
+	 * 保存一条数据
+	 * @param cuisine
+	 * @return
+	 */
+	int save(Cuisine cuisine);
+	
+	/**
+	 * 删除一条数据
+	 * @param id
+	 * @return
+	 */
+	int remove(@Param("id") int id);
 }

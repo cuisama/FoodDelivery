@@ -2,6 +2,8 @@ $(function(){
     var u = new util();
     var orders = {};
     var curPage = "m1";
+    var curModel = "";
+    var position = 0;
     $().ready(function () {
     	
     	$("#login").click(function(){
@@ -154,7 +156,71 @@ $(function(){
 
 
         //m2
-        //
+        //刷新按钮
+        $("#m2 .tool-bar button:nth-child(1)").click(function(){
+            showM2()
+        })
+        //新增按钮
+        $("#m2 .tool-bar button:nth-child(2)").click(function(){
+        	curModel = "save"
+            $("#editCuisineModal input").val("")
+        	$("#editCuisineModal .input-group:nth-child(7) label").html("上传文件");
+            $("#editCuisineModal").modal()
+        })
+        //上传文件
+       $("#editCuisineModal #upload").click(function(){
+        var formData = new FormData()
+        //var img_file = $("#editCuisineModal #inputGroupFile")[0]
+        var img_file = document.getElementById("inputGroupFile").files[0]
+        formData.append("file", img_file)
+        $.ajax({
+            url: "http://localhost:8080/Satiety/service/CuisineResource/upload",
+            type: "POST",
+            data: formData,
+            async: false,
+            processData: false,
+            contentType: false,
+            success: function(res){
+                if(res.match(/^\d*.png$/)){
+                    u.showModal("上传成功")
+                    $("#editCuisineModal .input-group:nth-child(7) label").html(res);
+                }else{
+                    u.showModal("上传失败")
+                }
+            },
+            error: function(){
+                u.showModal("上传失败")
+            }
+        })
+       })
+       
+       //提交
+       $("#editCuisineModal .btn-primary").click(function(){
+    	   var image = $("#editCuisineModal .input-group:nth-child(7) label").html()
+            var cuisine = {
+                id:$("#editCuisineModal .hidden-column input:nth-child(1)").val(),
+                name: $("#editCuisineModal .input-group:nth-child(1) input").val(),
+                price: $("#editCuisineModal .input-group:nth-child(2) input").val(),
+                preferential: $("#editCuisineModal .input-group:nth-child(3) input").val() || 0,
+                discount: $("#editCuisineModal .input-group:nth-child(4) input").val() || 1,
+                lable: $("#editCuisineModal .input-group:nth-child(5) input").val(),
+                remark: $("#editCuisineModal .input-group:nth-child(6) input").val(),
+                image:image.match(/^\d*.png$/) ? image : ""
+            }
+        	u.request({
+        		url:"/CuisineResource/" + curModel,
+        		method:"POST",
+        		data:cuisine,
+        		success:function(data){
+        			if(data != 1){
+                		u.showModal("操作失败")
+                	} else {
+                		u.showModal("操作成功")
+                		showM2();
+                	}
+        		}
+        	})
+        })
 
 
     });
@@ -166,16 +232,20 @@ $(function(){
                 var data = res;
                 var html = "";
                 for(var i = 0; i < data.length; i++){
+                	data[i].image = u.imgHost + (data[i].image||"image/cuisine_default.png")
                 	html += "<tr>"
+            		html += "<td><image src=" + data[i].image + " /></td>"
                     html += u.getTrHtml(data[i], ["id", "name", "price", "preferential", "discount"])
-                    html += "<td>" + (data[i].state != 1 ? "<a href='#' class='cuisine-state-ope0'>激活</a>" : "<a href='#' class='cuisine-state-ope1'>关闭</a>") + " <a href='#' class='cuisine-state-ope2'>编辑</a></td>"
+                    html += "<td>" + (data[i].state != 1 ? "<a href='#' class='cuisine-state-ope0'>激活</a>" : "<a href='#' class='cuisine-state-ope1'>关闭</a>") 
+                    	+ " <a href='#' class='cuisine-state-ope2'>编辑</a> <a href='#' class='cuisine-state-ope3'>删除</a></td>"
                     html += "</tr>";
                 }
                 $("#cuisineTable tbody").html(html)
-
+                $("html").scrollTop(position)
                 //去激活
                 $(".cuisine-state-ope0").click(function(){
-                	var id = u.getKey(this)
+                	position = $("html").scrollTop()
+                	var id = u.getColumn(this, 2)
                     u.request({
                         url:"/CuisineResource/updateState/" + id + "/1",
                         method:"POST",
@@ -191,7 +261,8 @@ $(function(){
                 })
                 //去关闭
                 $(".cuisine-state-ope1").click(function(){
-                	var id = u.getKey(this)
+                	position = $("html").scrollTop()
+                	var id = u.getColumn(this, 2)
                     u.request({
                         url:"/CuisineResource/updateState/" + id + "/0",
                         method:"POST",
@@ -207,44 +278,47 @@ $(function(){
                 })
                 //编辑
                 $(".cuisine-state-ope2").click(function(){
+                	//position = $("html").scrollTop()
+                	curModel = "update"
+                	var i = 2;
                 	var o = {
-                		id:u.getColumn(this, 1),
-                		name: u.getColumn(this, 2),
-                		price: u.getColumn(this, 3),
-                		preferential: u.getColumn(this, 4),
-                		discount: u.getColumn(this, 5),
+                		id:u.getColumn(this, i++),
+                		name: u.getColumn(this, i++),
+                		price: u.getColumn(this, i++),
+                		preferential: u.getColumn(this, i++),
+                		discount: u.getColumn(this, i++),
                 	}
                 	$("#editCuisineModal .hidden-column input:nth-child(1)").val(o.id)
                 	$("#editCuisineModal .input-group:nth-child(1) input").val(o.name);
                 	$("#editCuisineModal .input-group:nth-child(2) input").val(o.price);
                 	$("#editCuisineModal .input-group:nth-child(3) input").val(o.preferential);
                 	$("#editCuisineModal .input-group:nth-child(4) input").val(o.discount);
+                	$("#editCuisineModal .input-group:nth-child(7) label").html("上传文件");
                 	$("#editCuisineModal").modal()
+                })
+                
+                //删除
+                $(".cuisine-state-ope3").click(function(){
+                	position = $("html").scrollTop()
+                	var id = u.getColumn(this, 2)
+                    u.request({
+                        url:"/CuisineResource/remove/" + id,
+                        method:"POST",
+                        success: function(data){
+                        	if(data != 1){
+                        		u.showModal("删除失败")
+                        	} else {
+                        		u.showModal("删除成功")
+                        		showM2();
+                        	}
+                        	
+                        }
+                    })
                 })
             }
         })
         
-        $("#editCuisineModal .btn-primary").click(function(){
-            var cuisine = {
-                id:$("#editCuisineModal .hidden-column input:nth-child(1)").val(),
-                name: $("#editCuisineModal .input-group:nth-child(1) input").val(),
-                price: $("#editCuisineModal .input-group:nth-child(2) input").val(),
-                preferential: $("#editCuisineModal .input-group:nth-child(3) input").val(),
-                discount: $("#editCuisineModal .input-group:nth-child(4) input").val(),
-            }
-        	u.request({
-        		url:"/CuisineResource/update",
-        		method:"POST",
-        		data:cuisine,
-        		success:function(data){
-        			if(data != 1){
-                		u.showModal("更新失败")
-                	} else {
-                		showM2();
-                	}
-        		}
-        	})
-        })
+        
     }
 
     function showM3(){
@@ -289,17 +363,18 @@ $(function(){
 var util = function () {
     this.orderState = ["待确认", "已确认", "已完成", "待评价"]
     this.token = ""
+    this.imgHost = ""//"http://localhost:8080/Satiety/image/"
 }
 util.prototype={
     request:function (data) {
     	var _this = this;
         $.ajax({
             url: "http://localhost:8080/Satiety/service" + data.url,
-            data: data.data,//data.method == "POST" ? JSON.stringify(data.data) : data.data,
+            data: data.method == "POST" ? JSON.stringify(data.data) : data.data,
             method: data.method || "GET",
             contentType:"application/json",
             headers:{
-                "token": this.token
+                "token": this.token || "oGZUI0egBJY1zhBYw2KhdUfwVJJE"
             },
             success:function (res) {
                 data.success(res);
@@ -313,6 +388,28 @@ util.prototype={
                 }
             }
         });
+    },
+    upload:function(doc){
+        var formData = new formData()
+        var img_file = doc.file[0]
+        $.ajax({
+            url: "/CuisineResource/upload",
+            type: "POST",
+            data: formData,
+            async: false,
+            processData: false,
+            contentType: false,
+            success: function(res){
+                if(res == "success"){
+                    this.showModal("上传成功")
+                }else{
+                    this.showModal("上传失败")
+                }
+            },
+            error: function(){
+                this.showModal("上传失败")
+            }
+        })
     },
     getTrHtml:function (obj, columns) {
         html = ""
@@ -336,5 +433,8 @@ util.prototype={
         })
         $('#modal').modal()
     },
+    restore:function(position){
+    	document.getElementByTag('body').scrollTop = position;
+    }
 
 }
